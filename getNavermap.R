@@ -245,16 +245,16 @@ getNaverMapimg <- function(lon, lat, zoom=NA, GRAYSCALE=FALSE){
     for(x in xtileind){
       xiter <- xiter + 1
       addr <- paste("http://onetile2.map.naver.net/get/74/0/0/", z, "/", x, "/", y, "/bl_vc_bg/ol_vc_an", sep="")
-      download.file(addr, "~/test.png", quiet = TRUE)
+      download.file(addr, "test.png", quiet = TRUE)
       
       
       if(GRAYSCALE){
-        test <- readPNG("~/test.png", native = FALSE)
+        test <- readPNG("test.png", native = FALSE)
         test <- RGB2GRAY(test)
-        writePNG(test, "~/test.png")
-        test <- readPNG("~/test.png", native = FALSE)
+        writePNG(test, "test.png")
+        test <- readPNG("test.png", native = FALSE)
       } else {
-        test <- readPNG("~/test.png")
+        test <- readPNG("test.png")
       }
       
       rasterImage(test, tileind$bbox$x[xiter + (nx + 1)*(yiter - 1)], 
