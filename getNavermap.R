@@ -56,7 +56,7 @@ toTile <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")){
   return(list(xtileind = xtile, ytileind = ytile, bbox = xy, maproj = maproj, zoom=zoom))
 }
 
-getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver"), GRAYSCALE=FALSE){
+getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAYSCALE=FALSE){
     require(png)
     require(RgoogleMaps)
     lon <- sort(lon)
