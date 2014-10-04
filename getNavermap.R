@@ -1,4 +1,4 @@
-toTile <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")){
+toTile <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2]){
     require(rgdal)
     maxZoomLevels <- 14
     if(!is.na(zoom)){
