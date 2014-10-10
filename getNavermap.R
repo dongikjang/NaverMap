@@ -76,7 +76,7 @@ getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAY
         ny <- 0
         for(y in ytileind){
             addr <- paste("http://onetile2.map.naver.net/get/74/0/0/", z, "/", x, "/", y, "/bl_vc_bg/ol_vc_an", sep="")
-            download.file(addr, "test.png", quiet = TRUE)
+            download.file(addr, "test.png", quiet = TRUE, mode="wb")
             if(GRAYSCALE){
               test <- readPNG("test.png", native = FALSE)
               test <- RGB2GRAY(test)
