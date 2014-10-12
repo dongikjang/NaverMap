@@ -1,3 +1,3 @@
 NaverMap
 ========
-R functions for using Daum Map tiles
+R functions for using Naver Map tiles
