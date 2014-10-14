@@ -16,7 +16,7 @@ tloc <- read.csv("TCountingLocInSeoul.csv", header = TRUE, stringsAsFactors = FA
 lon <- tloc$X5
 lat <- tloc$X6
 
-# download Daum Map tiles
+# download Naver Map tiles
 dmap <- getNaverMap(lon, lat, zoom=NA)
 cols <- brewer.pal(9, "Set1")
 plot(dmap)
