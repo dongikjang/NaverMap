@@ -36,9 +36,12 @@ lon <- tloc$X5
 lat <- tloc$X6
 
 # download Naver Map tiles
-dmap <- getNaverMap(lon, lat, zoom=NA)
+nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Hybrid")
+# Select the map style among "Hybrid", "Physical", "Satellite", 
+# "Street" and "Cadstral".
+# Default is "Hybrid".
 cols <- brewer.pal(9, "Set1")
-plot(dmap)
+plot(nmap)
 naverloc <- WGS842Naver(tloc[ , c("X5", "X6")])
 points(naverloc,  pch=19, col=cols[tloc$X2])
 ```
