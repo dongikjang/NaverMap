@@ -61,7 +61,8 @@ toTileNaver <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2]){
   return(list(xtileind = xtile, ytileind = ytile, bbox = xy, maproj = maproj, zoom=zoom))
 }
 
-getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAYSCALE=FALSE){
+getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAYSCALE=FALSE,
+                        mapstyle=c("Hybrid", "Physical", "Satellite", "Street", "Cadstral")){
     require(png)
     require(RgoogleMaps)
     lon <- sort(lon)
@@ -76,11 +77,25 @@ getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAY
   
     tmp1 <- NULL
     nx <- 0
+    #"http://onetile2.map.naver.net/get/80/0/0/${z}/${x}/${y}/bl_st_bg/ol_st_rd/ol_st_an"
+    #"http://onetile2.map.naver.net/get/80/0/0/${z}/${x}/${y}/bl_tn_bg/ol_vc_bg/ol_vc_an"
+    #"http://onetile2.map.naver.net/get/80/0/0/${z}/${x}/${y}/bl_st_bg/ol_st_an"
+    #"http://onetile2.map.naver.net/get/80/0/0/${z}/${x}/${y}/bl_vc_bg/ol_vc_an"
+    #"http://onetile2.map.naver.net/get/80/0/0/${z}/${x}/${y}/bl_vc_bg/ol_lp_cn"
+
+    mapadd <- "http://onetile2.map.naver.net/get/80/0/0/"
     for(x in xtileind){
         tmp2 <- NULL
         ny <- 0
         for(y in ytileind){
-            addr <- paste("http://onetile2.map.naver.net/get/74/0/0/", z, "/", x, "/", y, "/bl_vc_bg/ol_vc_an", sep="")
+            addr <- switch(mapstyle[1],
+                            Hybrid = paste(mapadd, z, "/", x, "/", y, "/bl_st_bg/ol_st_rd/ol_st_an", sep=""),
+                            Physical = paste(mapadd, z, "/", x, "/", y, "/bl_tn_bg/ol_vc_bg/ol_vc_an", sep=""),
+                            Satellite = paste(mapadd, z, "/", x, "/", y, "/bl_st_bg/ol_st_an", sep=""),
+                            Street = paste(mapadd, z, "/", x, "/", y, "/bl_vc_bg/ol_vc_an", sep=""),
+                            Cadstral = paste(mapadd, z, "/", x, "/", y, "/bl_vc_bg/ol_lp_cn", sep=""))
+
+            #addr <- paste("http://onetile2.map.naver.net/get/74/0/0/", z, "/", x, "/", y, "/bl_vc_bg/ol_vc_an", sep="")
             download.file(addr, "test.png", quiet = TRUE, mode="wb")
             if(GRAYSCALE){
               test <- readPNG("test.png", native = FALSE)
@@ -110,13 +125,13 @@ getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAY
     
     }
   
-    outobj <- list(pngmap = tmp1, bbox=tileind$bbox, tileind=tileind, zoom=zoom, maproj=maproj)
+    outobj <- list(pngmap = tmp1, bbox=tileind$bbox, tileind=tileind, zoom=zoom, maproj=maproj, mapstyle=mapstyle)
     class(outobj) <- "navermap"
     return(outobj)
 }
 
 print.navermap <- function(obj){
-    cat("Importing Naver map tiles\n")
+    cat(paste("Importing Naver map tiles (", obj$mapstyle, ")\n", sep=""))
     cat(paste(" Zoom Level:", obj$zoom, "\n")) 
     cat(paste(" Tile :", diff(obj$tileind$xtileind)+1, "*", diff(obj$tileind$ytileind)+1), "\n") 
     cat(paste(" Tile index: longitude (", obj$tileind$xtileind[1], "-", 
