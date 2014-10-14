@@ -7,7 +7,10 @@ toTileNaver <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2]){
     
     if(length(lon) > 2) lon <- range(lon, na.rm=TRUE)
     if(length(lat) > 2) lat <- range(lat, na.rm=TRUE)
-      
+    
+    if(length(lon) == 1) lon <- lon + c(-.1, .1)
+    if(length(lat) == 1) lat <- lat + c(-.1, .1)
+    
     xy <- data.frame(x=lon, y=lat)
     coordinates(xy) <- c("x", "y")
     proj4string(xy) <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 
