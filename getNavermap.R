@@ -222,7 +222,7 @@ getNaverMapimg <- function(lon, lat, zoom=NA, GRAYSCALE=FALSE){
   require(RgoogleMaps)
   lon <- sort(lon)
   lat <- sort(lat)
-  
+
   tileind <- toTile(lon, lat, zoom=zoom, maproj="Naver")
   
   zoom <- tileind$zoom
