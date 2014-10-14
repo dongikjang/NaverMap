@@ -1,4 +1,4 @@
-toTile <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2]){
+toTileNaver <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2]){
     require(rgdal)
     maxZoomLevels <- 14
     if(!is.na(zoom)){
@@ -64,7 +64,7 @@ getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAY
     lon <- sort(lon)
     lat <- sort(lat)
       
-    tileind <- toTile(lon, lat, zoom=zoom, maproj=maproj)
+    tileind <- toTileNaver(lon, lat, zoom=zoom, maproj=maproj)
   
     zoom <- tileind$zoom
     xtileind <- sort(tileind$xtileind[1]:tileind$xtileind[2])
@@ -223,7 +223,7 @@ getNaverMapimg <- function(lon, lat, zoom=NA, GRAYSCALE=FALSE){
   lon <- sort(lon)
   lat <- sort(lat)
 
-  tileind <- toTile(lon, lat, zoom=zoom, maproj="Naver")
+  tileind <- toTileNaver(lon, lat, zoom=zoom, maproj="Naver")
   
   zoom <- tileind$zoom
   xtileind <- sort(tileind$xtileind[1]:tileind$xtileind[2])
