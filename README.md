@@ -11,8 +11,19 @@ require(png)
 require(RgoogleMaps)
 require(RColorBrewer)
 
+
+gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
+
+# load the source code
+library(RCurl)
+
+u <- paste(gitaddress, "master/getNavermap.R", sep="")
+eval(parse(text = getURL(u, followlocation = TRUE, 
+                         cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
+           ), 
+     envir = .GlobalEnv)
+     
 # load location of traffic counting data in Seoul
-library(RCurl)       
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
 TCLoc <- getURL(paste(gitaddress, "master/TCountingLocInSeoul.csv", sep=""),
     	          cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
