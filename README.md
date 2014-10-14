@@ -2,16 +2,9 @@ NaverMap
 ========
 R functions for using Naver Map tiles
 
-
-### An example
+### Load the source code for using Naver Map tiles
 
 ```coffee
-require(rgdal)
-require(png)
-require(RgoogleMaps)
-require(RColorBrewer)
-
-
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
 
 # load the source code
@@ -22,6 +15,15 @@ eval(parse(text = getURL(u, followlocation = TRUE,
                          cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
            ), 
      envir = .GlobalEnv)
+```
+
+### An example
+
+```coffee
+require(rgdal)
+require(png)
+require(RgoogleMaps)
+require(RColorBrewer)
      
 # load location of traffic counting data in Seoul
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
