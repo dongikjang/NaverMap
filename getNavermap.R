@@ -5,6 +5,8 @@ toTile <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2]){
       if(zoom > maxZoomLevels) stop(paste("zoom level is greater than", maxZoomLevels, "\n"))
     }
     
+    if(length(lon) > 2) lon <- range(lon, na.rm=TRUE)
+    if(length(lat) > 2) lat <- range(lat, na.rm=TRUE)
       
     xy <- data.frame(x=lon, y=lat)
     coordinates(xy) <- c("x", "y")
