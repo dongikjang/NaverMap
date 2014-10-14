@@ -24,6 +24,7 @@ require(rgdal)
 require(png)
 require(RgoogleMaps)
 require(RColorBrewer)
+library(RCurl)
      
 # load location of traffic counting data in Seoul
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
@@ -36,7 +37,7 @@ lon <- tloc$X5
 lat <- tloc$X6
 
 # download Naver Map tiles
-nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Hybrid")
+nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Street")
 # Select the map style among "Hybrid", "Physical", "Satellite", 
 # "Street" and "Cadstral".
 # Default is "Hybrid".
