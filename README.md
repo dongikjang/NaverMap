@@ -20,10 +20,10 @@ eval(parse(text = getURL(u, followlocation = TRUE,
 ### An example
 
 ```r
-require(rgdal)
-require(png)
-require(RgoogleMaps)
-require(RColorBrewer)
+library(rgdal)
+library(png)
+library(RgoogleMaps)
+library(RColorBrewer)
 library(RCurl)
      
 # load location of traffic counting data in Seoul
