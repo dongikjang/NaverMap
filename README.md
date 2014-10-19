@@ -4,7 +4,7 @@ R functions for using Naver Map tiles
 
 ### Load the source code for using Naver Map tiles
 
-```coffee
+```r
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
 
 # load the source code
@@ -19,7 +19,7 @@ eval(parse(text = getURL(u, followlocation = TRUE,
 
 ### An example
 
-```coffee
+```r
 require(rgdal)
 require(png)
 require(RgoogleMaps)
