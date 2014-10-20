@@ -27,7 +27,7 @@ download.file.Bin <- function(url, destfile, encoding="UTF-8"){
      
 ```
 
-### An examples
+### An example
 
 ```r
 library(rgdal)
