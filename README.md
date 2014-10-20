@@ -65,7 +65,6 @@ proj4val <- "+proj=tmerc +lat_0=38 +lon_0=127.0028902777778 +k=1
              +units=m +no_defs 
              +towgs84=-115.80,474.99,674.11,1.16,-2.31,-1.63,6.43"
 seoulwgs <- readShapePoly("shpfile/Seoul.shp", proj4string=CRS(proj4val))
-seoulnaver <- spTransform(seoulwgs, nmap$proj4) 
 ```
 #### Download Naver Map tiles 
 ```r
@@ -78,6 +77,7 @@ nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Street")
 ```r
 cols <- brewer.pal(9, "Set1")
 plot(nmap)
+seoulnaver <- spTransform(seoulwgs, nmap$proj4) 
 plot(seoulnaver, col=alpha(cols[9], .3), lwd=.1, border=1, add=T)
 naverloc <- WGS842Naver(tloc[ , c("X5", "X6")])
 points(naverloc,  pch=19, col=cols[tloc$X2])
