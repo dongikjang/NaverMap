@@ -76,4 +76,4 @@ naverloc <- WGS842Naver(tloc[ , c("X5", "X6")])
 points(naverloc,  pch=19, col=cols[tloc$X2])
 ```
 
-![tloc](screenshots/tloc.png)
+![navermap](screenshots/navermap.jpeg)
