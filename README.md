@@ -27,7 +27,7 @@ download.file.Bin <- function(url, destfile, encoding="UTF-8"){
      
 ```
 
-### An example
+### An examples
 
 ```r
 library(rgdal)
@@ -62,7 +62,7 @@ proj4val <- "+proj=tmerc +lat_0=38 +lon_0=127.0028902777778 +k=1
              +units=m +no_defs 
              +towgs84=-115.80,474.99,674.11,1.16,-2.31,-1.63,6.43"
 seoulwgs <- readShapePoly("shpfile/Seoul.shp", proj4string=CRS(proj4val))
-seoulnaver <- spTransform(seoul, nmap$proj4) 
+seoulnaver <- spTransform(seoulwgs, nmap$proj4) 
 
 # download Naver Map tiles
 nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Street")
@@ -71,7 +71,7 @@ nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Street")
 # Default is "Hybrid".
 cols <- brewer.pal(9, "Set1")
 plot(nmap)
-plot(seoulnaver, col=alpha(cols[9], .4), lwd=.1, border=1, add=T)
+plot(seoulnaver, col=alpha(cols[9], .3), lwd=.1, border=1, add=T)
 naverloc <- WGS842Naver(tloc[ , c("X5", "X6")])
 points(naverloc,  pch=19, col=cols[tloc$X2])
 ```
