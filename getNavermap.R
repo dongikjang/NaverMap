@@ -134,7 +134,7 @@ getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAY
     }
   
     outobj <- list(pngmap = tmp1, bbox=tileind$bbox, tileind=tileind, zoom=zoom, 
-                   maproj=maproj, pro4=proj4, mapstyle=mapstyle[1])
+                   maproj=maproj, proj4=proj4, mapstyle=mapstyle[1])
     class(outobj) <- "navermap"
     return(outobj)
 }
