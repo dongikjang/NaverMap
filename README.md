@@ -40,7 +40,7 @@ library(maptools)
 library(scales)
 ```
     
-#### Download and load location of traffic counting data in Seoul
+#### Download and load locations of traffic counting data in Seoul
 ```r
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
 TCLoc <- getURL(paste(gitaddress, "master/TCountingLocInSeoul.csv", sep=""),
@@ -51,7 +51,7 @@ tloc <- read.csv(textConnection(TCLoc), stringsAsFactors = FALSE,
 lon <- tloc$X5
 lat <- tloc$X6
 ```
-#### Download and load administrative areas shpfile of Seoul
+#### Download and load administrative area shpfile of Seoul
 ```r
 dir.create("shpfile")
 download.file.Bin(paste(gitaddress, "master/shpfile/Seoul.shp", sep=""),
