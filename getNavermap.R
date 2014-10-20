@@ -124,6 +124,14 @@ getNaverMap <- function(lon, lat, zoom=NA, maproj = c("WGS84", "Naver")[2], GRAY
         
     
     }
+    if(maproj[1] == "WGS84"){
+        proj4 <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84
+                        +units=m +no_defs")
+    } else{
+        proj4 <- CRS("+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996
+                        +k=1 +x_0=1000000 +y_0=2000000 +ellps=GRS80
+                        +units=m +no_defs")
+    }
   
     outobj <- list(pngmap = tmp1, bbox=tileind$bbox, tileind=tileind, zoom=zoom, maproj=maproj, mapstyle=mapstyle[1])
     class(outobj) <- "navermap"
