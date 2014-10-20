@@ -2,7 +2,7 @@ NaverMap
 ========
 R functions for using Naver Map tiles
 
-### Load the source code for using Naver Map tiles
+## Load the source code for using Naver Map tiles
 
 ```r
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
@@ -27,8 +27,9 @@ download.file.Bin <- function(url, destfile, encoding="UTF-8"){
      
 ```
 
-### An example
+## An example
 
+#### Load required libraries
 ```r
 library(rgdal)
 library(png)
@@ -37,9 +38,10 @@ library(RColorBrewer)
 library(RCurl)
 library(maptools)
 library(scales)
-
-     
-# load location of traffic counting data in Seoul
+```
+    
+#### Download and load location of traffic counting data in Seoul
+```r
 gitaddress <- "https://raw.githubusercontent.com/dongikjang/NaverMap/"
 TCLoc <- getURL(paste(gitaddress, "master/TCountingLocInSeoul.csv", sep=""),
     	          cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
@@ -48,8 +50,9 @@ tloc <- read.csv(textConnection(TCLoc), stringsAsFactors = FALSE,
                  fileEncoding = "UTF-8")
 lon <- tloc$X5
 lat <- tloc$X6
-
-# download shpfile of Seoul and load
+```
+#### Download and load administrative areas shpfile of Seoul
+```r
 dir.create("shpfile")
 download.file.Bin(paste(gitaddress, "master/shpfile/Seoul.shp", sep=""),
                   "shpfile/Seoul.shp")
@@ -63,12 +66,16 @@ proj4val <- "+proj=tmerc +lat_0=38 +lon_0=127.0028902777778 +k=1
              +towgs84=-115.80,474.99,674.11,1.16,-2.31,-1.63,6.43"
 seoulwgs <- readShapePoly("shpfile/Seoul.shp", proj4string=CRS(proj4val))
 seoulnaver <- spTransform(seoulwgs, nmap$proj4) 
-
-# download Naver Map tiles
+```
+#### Download Naver Map tiles 
+```r
 nmap <- getNaverMap(lon, lat, zoom=NA, mapstyle="Street")
 # Select the map style among "Hybrid", "Physical", "Satellite", 
 # "Street" and "Cadstral".
 # Default is "Hybrid".
+```
+#### Plot 
+```r
 cols <- brewer.pal(9, "Set1")
 plot(nmap)
 plot(seoulnaver, col=alpha(cols[9], .3), lwd=.1, border=1, add=T)
